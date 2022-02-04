@@ -73,12 +73,13 @@ const detectPose = async () => {
         right_wrist.y,
         right_hip.y
       );
-      document.getElementById(
-        "rightWristAndHeapDistance"
-      ).innerHTML = rightWristAndHeapDistance;
-      document.getElementById(
-        "leftWristAndHeapDistance"
-      ).innerHTML = leftWristAndHeapDistance;
+      // document.getElementById(
+      //   "rightWristAndHeapDistance"
+      // ).innerHTML = rightWristAndHeapDistance;
+
+      // document.getElementById(
+      //   "leftWristAndHeapDistance"
+      // ).innerHTML = leftWristAndHeapDistance;
 
       //if both hands are up
       if (
