@@ -60,14 +60,14 @@ const detectPose = async () => {
       document.getElementById("message").innerHTML =
         "We are good to count Squarts now ";
 
-      var rightWristAndHeapDistance = distanceBetweenTwo(
+      var leftWristAndHeapDistance = distanceBetweenTwo(
         left_wrist.x,
         left_hip.x,
         left_wrist.y,
         left_hip.y
       );
       
-      var leftWristAndHeapDistance = distanceBetweenTwo(
+      var rightWristAndHeapDistance = distanceBetweenTwo(
         right_wrist.x,
         right_hip.x,
         right_wrist.y,
@@ -79,12 +79,20 @@ const detectPose = async () => {
         //if both hands are up
         if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance > serveHandUpScore){
           canCountIncrease = true;
+          document.getElementById("logger").innerHTML = "both hands are up";
 
+          
           //check for non- serving hand go down first which is left
           if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance < serveHandUpScore){
 
+
+            document.getElementById("logger").innerHTML = "left hand down";
+
             //serving hand go down after serve
             if(rightWristAndHeapDistance < serveHandUpScore){
+
+              document.getElementById("logger").innerHTML = "right hand down";
+
               countValue = countValue+1;
               document.getElementById("countValue").innerHTML = countValue;
               canCountIncrease = false;
