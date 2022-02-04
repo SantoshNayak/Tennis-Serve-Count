@@ -41,7 +41,7 @@ const detectPose = async () => {
   const poses = await detector.estimatePoses(document.querySelector("video"));
 
   // const predictions = await model.estimateHands(document.querySelector("video"));
-  console.log(poses);
+  // console.log(poses);
 
   // temporary area
   if (poses.length) {
