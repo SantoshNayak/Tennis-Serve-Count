@@ -78,6 +78,21 @@ const detectPose = async () => {
       
         //if both hands are up
         if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance > serveHandUpScore){
+          canCountIncrease = true;
+
+          //check for non- serving hand go down first which is left
+          if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance < serveHandUpScore){
+
+            //serving hand go down after serve
+            if(rightWristAndHeapDistance < serveHandUpScore){
+              countValue = countValue+1;
+              document.getElementById("countValue").innerHTML = countValue;
+              canCountIncrease = false;
+
+              
+            }
+
+          }
 
         }
 
