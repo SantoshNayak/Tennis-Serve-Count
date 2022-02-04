@@ -61,13 +61,11 @@ const detectPose = async () => {
         "We are good to count Squarts now ";
 
       var rightWristAndHeapDistance = distanceBetweenTwo(
-        right_wrist.x,
-        right_hip.x,
-        right_wrist.y,
-        right_hip.y
+        left_wrist.x,
+        left_hip.x,
+        left_wrist.y,
+        left_hip.y
       );
-
-
       
       var leftWristAndHeapDistance = distanceBetweenTwo(
         right_wrist.x,
@@ -80,7 +78,7 @@ const detectPose = async () => {
       
         //if both hands are up
         if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance > serveHandUpScore){
-          
+
         }
 
     } else {
