@@ -99,7 +99,7 @@ const detectPose = async () => {
 
 
           //serving hand go down after serve
-          if(leftDownAfterBothUp && rightWristAndHeapDistance < serveHandUpScore){
+          if(leftDownAfterBothUp && rightWristAndHeapDistance < serveHandUpScore && canCountIncrease){
 
             document.getElementById("logger").innerHTML = "right hand down";
 
