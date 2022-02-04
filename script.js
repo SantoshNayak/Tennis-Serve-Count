@@ -8,8 +8,8 @@ var fps = 30;
 
 var serveHandUpScore = 100;
 
-var wereBothHandUp= false;
-var leftDownAfterBothUp= false;
+var wereBothHandUp = false;
+var leftDownAfterBothUp = false;
 
 const detectorConfig = {
   modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
@@ -45,11 +45,8 @@ const detectPose = async () => {
 
   // temporary area
   if (poses.length) {
-  
-
     let right_wrist = poses[0].keypoints.find((x) => x.name == "right_wrist");
     let right_hip = poses[0].keypoints.find((x) => x.name == "right_hip");
-
 
     let left_wrist = poses[0].keypoints.find((x) => x.name == "left_wrist");
     let left_hip = poses[0].keypoints.find((x) => x.name == "left_hip");
@@ -61,7 +58,7 @@ const detectPose = async () => {
       left_hip.score > 0.5
     ) {
       document.getElementById("message").innerHTML =
-        "We are good to count Squarts now ";
+        "We are good to count Tennis Serve now ";
 
       var leftWristAndHeapDistance = distanceBetweenTwo(
         left_wrist.x,
@@ -69,47 +66,52 @@ const detectPose = async () => {
         left_wrist.y,
         left_hip.y
       );
-      
+
       var rightWristAndHeapDistance = distanceBetweenTwo(
         right_wrist.x,
         right_hip.x,
         right_wrist.y,
         right_hip.y
       );
-       document.getElementById("rightWristAndHeapDistance").innerHTML = rightWristAndHeapDistance;
-       document.getElementById("leftWristAndHeapDistance").innerHTML = leftWristAndHeapDistance;
-      
-        //if both hands are up
-        if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance > serveHandUpScore){
-          canCountIncrease = true;
-          wereBothHandUp = true
-          document.getElementById("logger").innerHTML = "both hands are up";
-        }
+      document.getElementById(
+        "rightWristAndHeapDistance"
+      ).innerHTML = rightWristAndHeapDistance;
+      document.getElementById(
+        "leftWristAndHeapDistance"
+      ).innerHTML = leftWristAndHeapDistance;
 
-         
-          //check for non- serving hand go down first which is left
-          if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance < serveHandUpScore && wereBothHandUp){
+      //if both hands are up
+      if (
+        rightWristAndHeapDistance > serveHandUpScore &&
+        leftWristAndHeapDistance > serveHandUpScore
+      ) {
+        canCountIncrease = true;
+        wereBothHandUp = true;
+        document.getElementById("logger").innerHTML = "both hands are up";
+      }
 
-            leftDownAfterBothUp = true;
-            document.getElementById("logger").innerHTML = "left hand down";
+      //check for non- serving hand go down first which is left
+      if (
+        rightWristAndHeapDistance > serveHandUpScore &&
+        leftWristAndHeapDistance < serveHandUpScore &&
+        wereBothHandUp
+      ) {
+        leftDownAfterBothUp = true;
+        document.getElementById("logger").innerHTML = "left hand down";
+      }
 
-            
+      //serving hand go down after serve
+      if (
+        leftDownAfterBothUp &&
+        rightWristAndHeapDistance < serveHandUpScore &&
+        canCountIncrease
+      ) {
+        document.getElementById("logger").innerHTML = "right hand down";
 
-          }
-
-
-          //serving hand go down after serve
-          if(leftDownAfterBothUp && rightWristAndHeapDistance < serveHandUpScore && canCountIncrease){
-
-            document.getElementById("logger").innerHTML = "right hand down";
-
-            countValue = countValue+1;
-            document.getElementById("countValue").innerHTML = countValue;
-            canCountIncrease = false;
-
-            
-          }
-
+        countValue = countValue + 1;
+        document.getElementById("countValue").innerHTML = countValue;
+        canCountIncrease = false;
+      }
     } else {
       document.getElementById("message").innerHTML =
         "We are not able to see your whole body";
