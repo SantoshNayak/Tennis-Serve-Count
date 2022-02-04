@@ -1,4 +1,4 @@
-# TF-Bicep-curl-count
+# Tennis-Serve-Count
 
 Note:- Please move to a area where your whole body is visible so that we can predict perfectly
 
@@ -8,4 +8,4 @@ https://github.com/tensorflow/tfjs-models/tree/master/pose-detection/src/movenet
 
 # Access The Live Website here
 
-https://santoshnayak.github.io/AI-Squart-Count
+https://santoshnayak.github.io/Tennis-Serve-Count/

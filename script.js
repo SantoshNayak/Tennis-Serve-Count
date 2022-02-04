@@ -6,8 +6,7 @@ let windowHeight = window.outerHeight * 0.4;
 let windowWidth = window.outerWidth - 100;
 var fps = 30;
 
-var thresholdRightKneeAndHipDownDistance = 20;
-var thresholdRightKneeAndHipUpDistance = 30;
+var serveHandUpScore = 100;
 
 const detectorConfig = {
   modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
@@ -67,9 +66,22 @@ const detectPose = async () => {
         right_wrist.y,
         right_hip.y
       );
-       document.getElementById("rightWristAndHeapDistance").innerHTML =rightWristAndHeapDistance;
-      
 
+
+      
+      var leftWristAndHeapDistance = distanceBetweenTwo(
+        right_wrist.x,
+        right_hip.x,
+        right_wrist.y,
+        right_hip.y
+      );
+       document.getElementById("rightWristAndHeapDistance").innerHTML = rightWristAndHeapDistance;
+       document.getElementById("leftWristAndHeapDistance").innerHTML = leftWristAndHeapDistance;
+      
+        //if both hands are up
+        if(rightWristAndHeapDistance > serveHandUpScore && leftWristAndHeapDistance > serveHandUpScore){
+          
+        }
 
     } else {
       document.getElementById("message").innerHTML =
