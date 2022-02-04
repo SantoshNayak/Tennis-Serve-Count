@@ -1,0 +1,31 @@
+* {
+  background-color: #def8fc;
+}
+canvas {
+  border: 5px solid #f58220;
+  border-radius: 9px;
+}
+.count {
+  color: #f58220;
+  font-size: 30px;
+}
+.goalachieved{
+  color: #f58220;
+  font-size: 20px;
+}
+#countValue{
+  color: #f58220;
+  font-size: 40px;
+
+}
+.test {
+  display: block;
+  margin: auto;
+  height: auto;
+}
+
+/* #canvas {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+} */
