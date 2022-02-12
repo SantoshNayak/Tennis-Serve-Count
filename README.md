@@ -11,4 +11,5 @@ https://github.com/tensorflow/tfjs-models/tree/master/pose-detection/src/movenet
 https://santoshnayak.github.io/Tennis-Serve-Count/
 
 # Demo
-<video src='https://youtu.be/FBHhyyXSMus' width=180/>
+https://youtu.be/FBHhyyXSMus
+
