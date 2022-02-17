@@ -6,6 +6,8 @@ let windowHeight = window.outerHeight * 0.4;
 let windowWidth = window.outerWidth - 100;
 var fps = 30;
 
+var targetCount = 10;
+
 var serveHandUpScore = 100;
 
 var wereBothHandUp = false;
@@ -112,6 +114,14 @@ const detectPose = async () => {
         countValue = countValue + 1;
         document.getElementById("countValue").innerHTML = countValue;
         canCountIncrease = false;
+
+        if (countValue >= targetCount) {
+          document.getElementById("targetAchievedMessage").innerHTML =
+            "🎇 Target Achieved 🎇";
+            console.log(true)
+        }
+
+        
       }
     } else {
       document.getElementById("message").innerHTML =
@@ -156,6 +166,16 @@ const detectPose = async () => {
 setupCamera();
 video.addEventListener("loadeddata", async () => {
   // document.getElementById("video").offsetWidth, document.getElementById("video").offsetHeight
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.get("goal")) {
+    targetCount = urlParams.get("goal");
+  }
+  document.getElementById("targetCount").innerHTML = targetCount;
+
+
+
 
   canvas.width = document.getElementById("video").offsetWidth;
   canvas.height = document.getElementById("video").offsetHeight;
