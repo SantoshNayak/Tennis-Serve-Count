@@ -90,7 +90,7 @@ const detectPose = async () => {
       ) {
         canCountIncrease = true;
         wereBothHandUp = true;
-        document.getElementById("logger").innerHTML = "both hands are up";
+        // document.getElementById("logger").innerHTML = "both hands are up";
       }
 
       //check for non- serving hand go down first which is left
@@ -100,7 +100,7 @@ const detectPose = async () => {
         wereBothHandUp
       ) {
         leftDownAfterBothUp = true;
-        document.getElementById("logger").innerHTML = "left hand down";
+        // document.getElementById("logger").innerHTML = "left hand down";
       }
 
       //serving hand go down after serve
@@ -109,7 +109,7 @@ const detectPose = async () => {
         rightWristAndHeapDistance < serveHandUpScore &&
         canCountIncrease
       ) {
-        document.getElementById("logger").innerHTML = "right hand down";
+        // document.getElementById("logger").innerHTML = "right hand down";
 
         countValue = countValue + 1;
         document.getElementById("countValue").innerHTML = countValue;
