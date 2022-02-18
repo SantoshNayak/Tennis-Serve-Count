@@ -166,6 +166,7 @@ const detectPose = async () => {
 setupCamera();
 video.addEventListener("loadeddata", async () => {
   // document.getElementById("video").offsetWidth, document.getElementById("video").offsetHeight
+  document.getElementById("countValue").innerHTML = countValue;
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -187,7 +188,7 @@ video.addEventListener("loadeddata", async () => {
   );
 
   document.getElementById("loadingText").innerHTML =
-    "Please stand in camera so that it can see full body";
+    "Please stand in front of the camera";
 
   // document.getElementById("upscoreThreshold").innerHTML =upValue;
   // document.getElementById("downscoreThreshold").innerHTML =downValue;

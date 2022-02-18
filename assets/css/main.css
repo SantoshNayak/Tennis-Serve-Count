@@ -15,7 +15,7 @@ canvas {
 }
 #countValue{
   color: #f58220;
-  font-size: 40px;
+  font-size: 30px;
 
 }
 .test {
@@ -29,3 +29,10 @@ canvas {
   height: 100%;
   border: 1px solid black;
 } */
+
+lottie-player {
+	/* --lottie-player-seeker-track-color: #e48509;
+	--lottie-player-seeker-thumb-color: #ffcc00; */
+  margin-left: auto;
+  margin-right: auto;
+  }
