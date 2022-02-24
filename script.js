@@ -1,7 +1,7 @@
 let video = document.getElementById("video");
 let model;
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
+// let canvas = document.getElementById("canvas");
+// let ctx = canvas.getContext("2d");
 let windowHeight = window.outerHeight * 0.4;
 let windowWidth = window.outerWidth - 100;
 var fps = 30;
@@ -17,6 +17,12 @@ const detectorConfig = {
   modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
 };
 
+// Hacks for Mobile Safari
+video.setAttribute("playsinline", true);
+video.setAttribute("controls", true);
+setTimeout(() => {
+    video.removeAttribute("controls");
+});
 // var upValue = 150;
 // var downValue = 130;
 
@@ -129,38 +135,24 @@ const detectPose = async () => {
     }
   }
 
-  //temporary area
+  
+  // ctx.drawImage(video, 0, 0, windowWidth, windowHeight);
 
-  // if (poses.length) angleCalculation(poses[0].keypoints);
-  // canvas.width = windowWidth;
-  // canvas.height = windowHeight;
-  ctx.drawImage(video, 0, 0, windowWidth, windowHeight);
+  // poses.forEach((eachPose) => {
+  //   ctx.beginPath();
+  //   ctx.lineWidth = "4";
+  //   ctx.strokeStyle = "blue";
+  
 
-  poses.forEach((eachPose) => {
-    ctx.beginPath();
-    ctx.lineWidth = "4";
-    ctx.strokeStyle = "blue";
-    //  ctx.rect(
-    //   eachPose.keypoints.topLeft[0],
-    //   eachPose.keypoints.topLeft[1],
-    //   eachPose.keypoints.bottomRight[0] -eachPose.keypoints.topLeft[0],
-    //   eachPose.keypoints.bottomRight[1] -eachPose.keypoints.topLeft[1]
+  //   ctx.fillStyle = "red";
+  //   eachPose.keypoints.forEach((key, index) => {
+  //     ctx.fillRect(key.x, key.y, 5, 5);
 
-    //  )
+     
+  //   });
 
-    ctx.fillStyle = "red";
-    eachPose.keypoints.forEach((key, index) => {
-      ctx.fillRect(key.x, key.y, 5, 5);
-
-      // if(index == 0){
-      //   ctx.moveTo(0, 0);
-      // }
-      // ctx.lineTo(key.x, key.y);
-    });
-    // ctx.lineTo(1,5,5,100,25,20);
-
-    ctx.stroke();
-  });
+  //   ctx.stroke();
+  // });
 };
 
 setupCamera();
@@ -178,10 +170,10 @@ video.addEventListener("loadeddata", async () => {
 
 
 
-  canvas.width = document.getElementById("video").offsetWidth;
-  canvas.height = document.getElementById("video").offsetHeight;
-  canvas.setAttribute("width", windowWidth);
-  canvas.setAttribute("height", windowHeight);
+  // canvas.width = document.getElementById("video").offsetWidth;
+  // canvas.height = document.getElementById("video").offsetHeight;
+  // canvas.setAttribute("width", windowWidth);
+  // canvas.setAttribute("height", windowHeight);
   detector = await poseDetection.createDetector(
     poseDetection.SupportedModels.MoveNet,
     detectorConfig
