@@ -1,8 +1,8 @@
 * {
   /* background-color: #def8fc; */
 }
-#bgDiv{
-  height: 100vh;
+#video{
+  border: 15px solid;
 }
 canvas {
   border: 5px solid #f58220;

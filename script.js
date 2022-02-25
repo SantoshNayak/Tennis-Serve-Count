@@ -18,6 +18,9 @@ const detectorConfig = {
   modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
 };
 
+var msg;
+
+
 // Hacks for Mobile Safari
 video.setAttribute("playsinline", true);
 video.setAttribute("controls", true);
@@ -68,11 +71,11 @@ const detectPose = async () => {
     ) {
 
       //once full body is visible we can relax the accuracy
-      thresholdAccuracy =0.1
+      thresholdAccuracy =0.3
       document.getElementById("message").innerHTML =
         "We are good to count Tennis Serve now ";
 
-        document.getElementById("bgDiv").style.backgroundColor = "green";
+        document.getElementById("video").style.borderColor = "green";
 
       var leftWristAndHeapDistance = distanceBetweenTwo(
         left_wrist.x,
@@ -125,6 +128,13 @@ const detectPose = async () => {
 
         countValue = countValue + 1;
         document.getElementById("countValue").innerHTML = countValue;
+
+
+        //speak value
+
+        msg.text = countValue;
+        window.speechSynthesis.speak(msg);
+        //end
         canCountIncrease = false;
 
         if (countValue >= targetCount) {
@@ -138,7 +148,7 @@ const detectPose = async () => {
     } else {
       document.getElementById("message").innerHTML =
         "We are not able to see your whole body";
-        document.getElementById("bgDiv").style.backgroundColor = "red";
+        document.getElementById("video").style.borderColor = "red";
 
 
 
@@ -167,6 +177,10 @@ const detectPose = async () => {
 
 setupCamera();
 video.addEventListener("loadeddata", async () => {
+
+
+  msg = new SpeechSynthesisUtterance();
+
   // document.getElementById("video").offsetWidth, document.getElementById("video").offsetHeight
   document.getElementById("countValue").innerHTML = countValue;
 
