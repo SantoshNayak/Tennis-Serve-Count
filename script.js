@@ -13,6 +13,7 @@ var serveHandUpScore = 100;
 var wereBothHandUp = false;
 var leftDownAfterBothUp = false;
 
+var thresholdAccuracy =0.5
 const detectorConfig = {
   modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
 };
@@ -60,13 +61,18 @@ const detectPose = async () => {
     let left_hip = poses[0].keypoints.find((x) => x.name == "left_hip");
 
     if (
-      right_wrist.score > 0.5 &&
-      right_hip.score > 0.5 &&
-      left_wrist.score > 0.5 &&
-      left_hip.score > 0.5
+      right_wrist.score > thresholdAccuracy &&
+      right_hip.score > thresholdAccuracy &&
+      left_wrist.score > thresholdAccuracy &&
+      left_hip.score > thresholdAccuracy
     ) {
+
+      //once full body is visible we can relax the accuracy
+      thresholdAccuracy =0.1
       document.getElementById("message").innerHTML =
         "We are good to count Tennis Serve now ";
+
+        document.getElementById("bgDiv").style.backgroundColor = "green";
 
       var leftWristAndHeapDistance = distanceBetweenTwo(
         left_wrist.x,
@@ -132,6 +138,10 @@ const detectPose = async () => {
     } else {
       document.getElementById("message").innerHTML =
         "We are not able to see your whole body";
+        document.getElementById("bgDiv").style.backgroundColor = "red";
+
+
+
     }
   }
 

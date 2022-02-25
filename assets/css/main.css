@@ -1,5 +1,8 @@
 * {
-  background-color: #def8fc;
+  /* background-color: #def8fc; */
+}
+#bgDiv{
+  height: 100vh;
 }
 canvas {
   border: 5px solid #f58220;
@@ -23,6 +26,9 @@ canvas {
   display: block;
   margin: auto;
   height: auto;
+}
+video{
+  border-radius: 15px;
 }
 
 @keyframes neon1 {
