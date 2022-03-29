@@ -13,24 +13,20 @@ var serveHandUpScore = 100;
 var wereBothHandUp = false;
 var leftDownAfterBothUp = false;
 
-var thresholdAccuracy =0.5
+var thresholdAccuracy = 0.5;
 const detectorConfig = {
   modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
 };
 
 var msg;
 
-
 // Hacks for Mobile Safari
 video.setAttribute("playsinline", true);
 video.setAttribute("controls", true);
 setTimeout(() => {
-    video.removeAttribute("controls");
+  video.removeAttribute("controls");
 });
-// var upValue = 150;
-// var downValue = 130;
 
-// var threshHoldKneeAnkleDistance = 30;
 let detector;
 
 var canCountIncrease = false;
@@ -69,13 +65,16 @@ const detectPose = async () => {
       left_wrist.score > thresholdAccuracy &&
       left_hip.score > thresholdAccuracy
     ) {
+      document.getElementById("video").style.borderColor = "green";
+
+      off();
 
       //once full body is visible we can relax the accuracy
-      thresholdAccuracy =0.3
+      thresholdAccuracy = 0.3;
       document.getElementById("message").innerHTML =
         "We are good to count Tennis Serve now ";
 
-        document.getElementById("video").style.borderColor = "green";
+      document.getElementById("video").style.borderColor = "green";
 
       var leftWristAndHeapDistance = distanceBetweenTwo(
         left_wrist.x,
@@ -129,46 +128,38 @@ const detectPose = async () => {
         countValue = countValue + 1;
         document.getElementById("countValue").innerHTML = countValue;
 
-
         //speak value
+        //speech commented now as its not supported in web view
 
-        msg.text = countValue;
-        window.speechSynthesis.speak(msg);
+        // msg.text = countValue;
+        // window.speechSynthesis.speak(msg);
         //end
         canCountIncrease = false;
 
         if (countValue >= targetCount) {
           document.getElementById("targetAchievedMessage").innerHTML =
             "🎇 Target Achieved 🎇";
-            console.log(true)
+          console.log(true);
         }
-
-        
       }
     } else {
       document.getElementById("message").innerHTML =
         "We are not able to see your whole body";
-        document.getElementById("video").style.borderColor = "red";
-
-
-
+      document.getElementById("video").style.borderColor = "red";
     }
   }
 
-  
   // ctx.drawImage(video, 0, 0, windowWidth, windowHeight);
 
   // poses.forEach((eachPose) => {
   //   ctx.beginPath();
   //   ctx.lineWidth = "4";
   //   ctx.strokeStyle = "blue";
-  
 
   //   ctx.fillStyle = "red";
   //   eachPose.keypoints.forEach((key, index) => {
   //     ctx.fillRect(key.x, key.y, 5, 5);
 
-     
   //   });
 
   //   ctx.stroke();
@@ -177,8 +168,6 @@ const detectPose = async () => {
 
 setupCamera();
 video.addEventListener("loadeddata", async () => {
-
-
   msg = new SpeechSynthesisUtterance();
 
   // document.getElementById("video").offsetWidth, document.getElementById("video").offsetHeight
@@ -190,9 +179,6 @@ video.addEventListener("loadeddata", async () => {
     targetCount = urlParams.get("goal");
   }
   document.getElementById("targetCount").innerHTML = targetCount;
-
-
-
 
   // canvas.width = document.getElementById("video").offsetWidth;
   // canvas.height = document.getElementById("video").offsetHeight;
@@ -210,6 +196,8 @@ video.addEventListener("loadeddata", async () => {
   // document.getElementById("downscoreThreshold").innerHTML =downValue;
 
   setInterval(detectPose, fps);
+  on();
+  document.getElementById("overlaytext").innerHTML = "Detecting";
 });
 
 function sendMessagetoFlutter(value) {
@@ -222,4 +210,11 @@ function distanceBetweenTwo(x2, x1, y2, y1) {
   var b = y2 - y1;
 
   return Math.sqrt(a * a + b * b);
+}
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
 }
